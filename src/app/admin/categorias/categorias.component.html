@@ -1,0 +1,50 @@
+<div class="space-y-6 animate-fade-in px-4 sm:px-6 md:px-0">
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <h2 class="text-2xl font-bold text-[var(--asorisa-green)]">🏷️ Categorías</h2>
+    <button
+      (click)="abrirModal()"
+      class="bg-[var(--asorisa-green)] text-black font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition"
+    >
+      + Nueva categoría
+    </button>
+  </div>
+
+  <ul class="bg-gray-900 border border-gray-800 rounded-xl divide-y divide-gray-800 overflow-hidden">
+    <li *ngFor="let cat of categorias" class="flex justify-between p-4 hover:bg-gray-800 transition flex-wrap sm:flex-nowrap">
+      <span class="truncate">{{ cat.categoria }}</span>
+      <button (click)="eliminarCategoria(cat)" class="text-red-500 hover:underline mt-2 sm:mt-0">
+        Eliminar
+      </button>
+    </li>
+  </ul>
+
+  <!-- Modal -->
+  <div
+    *ngIf="modalAbierto"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+  >
+    <div class="bg-gray-900 p-6 rounded-lg w-full max-w-md sm:max-w-lg">
+      <h3 class="text-xl font-bold mb-4">Nueva Categoría</h3>
+      <input
+        [(ngModel)]="nuevaCategoria"
+        type="text"
+        placeholder="Nombre de la categoría"
+        class="w-full p-2 rounded-md mb-4 text-black"
+      />
+      <div class="flex flex-col sm:flex-row justify-end gap-2">
+        <button
+          (click)="cerrarModal()"
+          class="px-4 py-2 bg-gray-700 rounded-lg hover:opacity-90"
+        >
+          Cancelar
+        </button>
+        <button
+          (click)="guardarCategoria()"
+          class="px-4 py-2 bg-[var(--asorisa-green)] rounded-lg hover:opacity-90"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

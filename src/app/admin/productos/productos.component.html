@@ -1,0 +1,129 @@
+<div class="p-6 space-y-6 animate-fade-in">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center flex-wrap gap-3">
+    <h2 class="text-2xl font-bold text-[var(--asorisa-green)]">📦 Productos</h2>
+    <button
+      (click)="abrirModal()"
+      class="bg-[var(--asorisa-green)] text-black font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition"
+    >
+      + Agregar producto
+    </button>
+  </div>
+
+  <!-- Tabla scrollable -->
+  <div class="overflow-x-auto bg-gray-900 border border-gray-800 rounded-xl shadow-md">
+    <table class="min-w-full table-auto text-left">
+      <thead>
+        <tr class="bg-gray-800 text-gray-400 text-sm">
+          <th class="p-3">Nombre</th>
+          <th class="p-3 hidden md:table-cell">Descripción</th>
+          <th class="p-3">Categoría</th>
+          <th class="p-3">Precio</th>
+          <th class="p-3 hidden sm:table-cell">Stock</th>
+          <th class="p-3 hidden md:table-cell">Imagen</th>
+          <th class="p-3 text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos" class="border-t border-gray-800 hover:bg-gray-800 transition">
+          <td class="p-3 font-medium">{{ producto.nombre }}</td>
+          <td class="p-3 hidden md:table-cell">{{ producto.descripcion }}</td>
+          <td class="p-3">{{ producto.categoria }}</td>
+          <td class="p-3">${{ producto.valor | number }}</td>
+          <td class="p-3 hidden sm:table-cell">{{ producto.stock }}</td>
+          <td class="p-3 hidden md:table-cell">
+            <img *ngIf="producto.imagen" [src]="producto.imagen" alt="Imagen"
+              class="h-12 w-12 object-cover rounded" />
+          </td>
+          <td class="p-3 text-center flex flex-wrap gap-2 justify-center">
+            <button (click)="editarProducto(producto)" class="text-[var(--asorisa-green)] hover:underline">Editar</button>
+            <button (click)="eliminarProducto(producto)" class="text-red-500 hover:underline">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div
+    *ngIf="modalAbierto"
+    class="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4"
+  >
+    <div
+      class="bg-gray-900 border border-[var(--asorisa-green)] rounded-xl p-6 w-full max-w-md shadow-lg animate-fade-in"
+    >
+      <h3 class="text-lg font-semibold text-[var(--asorisa-green)] mb-4">
+        {{ productoSeleccionado ? "Editar producto" : "Nuevo producto" }}
+      </h3>
+
+      <form (ngSubmit)="guardarProducto()" class="space-y-3">
+        <input
+          type="text"
+          placeholder="Nombre"
+          [(ngModel)]="form.nombre"
+          name="nombre"
+          required
+          class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2 focus:outline-none focus:border-[var(--asorisa-green)]"
+        />
+
+        <textarea
+          placeholder="Descripción"
+          [(ngModel)]="form.descripcion"
+          name="descripcion"
+          rows="3"
+          class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2 focus:outline-none focus:border-[var(--asorisa-green)]"
+        ></textarea>
+
+        <select
+          [(ngModel)]="form.categoria"
+          name="categoria"
+          required
+          class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2 focus:outline-none focus:border-[var(--asorisa-green)]"
+        >
+          <option *ngFor="let cat of categorias || []" [value]="cat.categoria">{{ cat.categoria }}</option>
+        </select>
+
+        <input
+          type="number"
+          placeholder="Precio"
+          [(ngModel)]="form.valor"
+          name="valor"
+          required
+          class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2 focus:outline-none focus:border-[var(--asorisa-green)]"
+        />
+
+        <input
+          type="number"
+          placeholder="Stock"
+          [(ngModel)]="form.stock"
+          name="stock"
+          required
+          class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2 focus:outline-none focus:border-[var(--asorisa-green)]"
+        />
+
+        <!-- Imagen -->
+        <div class="mt-2">
+          <div *ngIf="!productoSeleccionado">
+            <input type="file" (change)="onFileSelected($event)" />
+            <img *ngIf="previewUrl" [src]="previewUrl" alt="Previsualización"
+              class="w-32 h-32 object-cover mt-2 rounded" />
+          </div>
+
+          <div *ngIf="productoSeleccionado">
+            <p class="text-gray-400 mb-1">Imagen actual:</p>
+            <img *ngIf="productoSeleccionado.imagen" [src]="productoSeleccionado.imagen" alt="Imagen actual"
+              class="w-32 h-32 object-cover mt-2 rounded" />
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-3 mt-4 flex-wrap">
+          <button type="button" (click)="cerrarModal()"
+            class="px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600">Cancelar</button>
+          <button type="submit"
+            class="px-4 py-2 rounded-lg bg-[var(--asorisa-green)] text-black font-semibold hover:opacity-90">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<section>
+  <h3 class="text-2xl font-semibold mb-6 text-[var(--asorisa-green)]">Productos destacados</h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    <div *ngFor="let p of products" class="card hover:scale-105 transform transition relative">
+      <img [src]="p.image" alt="{{p.name}}" class="w-full h-44 object-cover rounded-md mb-4">
+      <div class="p-2">
+        <h4 class="font-semibold">{{p.name}}</h4>
+        <p class="text-gray-400 mb-2">${{p.price}}</p>
+        <button class="bg-[var(--asorisa-green)] px-3 py-2 rounded text-black w-full hover:opacity-90 transition">Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+</section>

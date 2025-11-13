@@ -1,0 +1,87 @@
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.25s ease-out;
+}
+
+/* Color verde institucional */
+:root {
+  --asorisa-green: #00FFB2;
+}
+/* Animación ya existente */
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Color verde institucional */
+:root {
+  --asorisa-green: #00FFB2;
+}
+
+/* Estilo del menú */
+.menu-link {
+  position: relative;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* Subrayado animado en hover */
+.menu-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--asorisa-green);
+  transition: width 0.3s ease;
+}
+
+.menu-link:hover::after {
+  width: 100%;
+}
+
+/* Hover con leve escala y color verde */
+.menu-link:hover {
+  color: var(--asorisa-green);
+  transform: scale(1.05);
+}
+
+/* Estado activo — efecto burbuja luminosa */
+.menu-link.active {
+  background-color: var(--asorisa-green);
+  color: black;
+  box-shadow: 0 0 10px var(--asorisa-green), 0 0 20px var(--asorisa-green);
+  animation: slide-down 0.25s ease-out;
+}
+
+/* Ajuste del subrayado para que no se vea cuando está activo */
+.menu-link.active::after {
+  width: 0;
+}
+.menu-link.active {
+  animation: none;
+  animation: slide-down 0.25s ease-out, neon-pulse 2s infinite ease-in-out;
+}
+
+

@@ -1,0 +1,69 @@
+<div class="p-4 space-y-4 text-white animate-fade-in">
+  <h2 class="text-2xl font-bold text-[var(--asorisa-green)]">💰 Ventas recientes</h2>
+
+  <!-- Mensaje si no hay ventas -->
+  <div *ngIf="ventas.length === 0" class="text-gray-400">
+    No hay ventas registradas.
+  </div>
+
+  <!-- Vista escritorio (tabla) -->
+  <div class="hidden md:block overflow-x-auto">
+    <table class="min-w-full text-left bg-gray-900 border border-gray-800 rounded-xl shadow-md">
+      <thead>
+        <tr class="bg-gray-800 text-gray-400 text-sm">
+          <th class="p-3">Cliente</th>
+          <th class="p-3">Productos</th>
+          <th class="p-3">Total</th>
+          <th class="p-3">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of ventas" class="border-t border-gray-800 hover:bg-gray-800 transition">
+          <td class="p-3 font-medium text-[var(--asorisa-green)]">
+            {{ v.comprador || v.usuarioCorreo }}
+          </td>
+          <td class="p-3">
+            <ul class="space-y-1 text-sm">
+              <li *ngFor="let p of v.productos">
+                {{ p.nombre }} — {{ p.unidades }} und × ${{ p.precioUnitario | number }}
+              </li>
+            </ul>
+          </td>
+          <td class="p-3 font-semibold text-[var(--asorisa-green)]">
+            ${{ v.total | number }}
+          </td>
+          <td class="p-3 text-gray-400">
+            {{ v.fecha | date: 'short' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Vista móvil (tarjetas) -->
+  <div class="md:hidden space-y-4">
+    <div *ngFor="let v of ventas" class="bg-gray-800 border border-gray-700 rounded-lg p-4 shadow-md">
+      <div class="flex justify-between items-center">
+        <span class="font-semibold text-[var(--asorisa-green)]">
+          {{ v.comprador || v.usuarioCorreo }}
+        </span>
+        <span class="text-gray-400 text-sm">
+          {{ v.fecha | date: 'short' }}
+        </span>
+      </div>
+
+      <div class="mt-2 text-sm">
+        <p class="font-medium text-[var(--asorisa-green)]">Productos:</p>
+        <ul class="ml-2 list-disc">
+          <li *ngFor="let p of v.productos">
+            {{ p.nombre }} — {{ p.unidades }} und × ${{ p.precioUnitario | number }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-2 text-sm font-semibold text-[var(--asorisa-green)]">
+        Total: ${{ v.total | number }}
+      </div>
+    </div>
+  </div>
+</div>

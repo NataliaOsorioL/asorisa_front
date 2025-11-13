@@ -1,0 +1,50 @@
+:root {
+  --asorisa-green: #00FFB2;
+}
+
+.menu-link {
+  position: relative;
+  display: block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.menu-link:hover {
+  color: var(--asorisa-green);
+  background-color: rgba(0, 255, 178, 0.1);
+}
+
+.menu-link.active {
+  background-color: var(--asorisa-green);
+  color: black;
+  font-weight: 600;
+  box-shadow: 0 0 10px var(--asorisa-green), 0 0 20px var(--asorisa-green);
+  animation: slide-down 0.3s ease-out;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}

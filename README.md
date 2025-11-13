@@ -1,0 +1,1 @@
+# ASORISA Angular Starter\n\nFull project with Tailwind and cart animation. Run `npm install` then `npm run start`.

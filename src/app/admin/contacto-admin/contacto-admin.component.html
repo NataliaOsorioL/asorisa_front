@@ -1,0 +1,27 @@
+<div class="p-4 sm:p-6">
+  <h2 class="text-2xl font-bold mb-4 text-[var(--asorisa-green)]">Mensajes de Contacto</h2>
+
+  <div *ngIf="loading" class="text-gray-400">Cargando mensajes...</div>
+  <div *ngIf="error" class="text-red-500">{{ error }}</div>
+
+  <div *ngIf="!loading && contactos.length === 0" class="text-gray-400">
+    No hay mensajes recibidos.
+  </div>
+
+  <div *ngIf="!loading && contactos.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div
+      *ngFor="let c of contactos"
+      class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow border border-gray-700 hover:bg-gray-750 transition flex flex-col justify-between"
+    >
+      <div>
+        <div class="flex justify-between items-center">
+          <h3 class="text-lg font-semibold text-white truncate">{{ c.nombre }}</h3>
+          <span class="text-sm text-gray-400 whitespace-nowrap">{{ c.fecha | date:'short' }}</span>
+        </div>
+        <p class="text-gray-400 text-sm truncate">{{ c.email }}</p>
+        <p class="mt-2 font-medium text-[var(--asorisa-green)] truncate">Asunto: {{ c.asunto }}</p>
+        <p class="mt-2 text-gray-300 line-clamp-3">{{ c.mensaje }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const environment = {\n  production: false,\n  apiUrl: 'http://localhost:3000/api',\n  S3_BUCKET: 'asorisa-productos-2025'\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

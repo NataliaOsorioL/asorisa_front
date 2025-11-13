@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>ASORISA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        connect-src 'self' http://localhost:* 
+          https://asorisa-productos-2025.s3.us-east-1.amazonaws.com 
+          https://fizis1pgyi.execute-api.us-east-1.amazonaws.com;
+        img-src 'self' data: blob: 
+          https://asorisa-productos-2025.s3.amazonaws.com 
+          https://asorisa-productos-2025.s3.us-east-1.amazonaws.com;
+        font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      ">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-black text-white font-poppins">
+    <app-root></app-root>
+  </body>
+</html>

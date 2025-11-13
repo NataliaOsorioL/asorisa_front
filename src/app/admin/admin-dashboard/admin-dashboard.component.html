@@ -1,0 +1,54 @@
+<div class="min-h-screen flex bg-gray-950 text-white">
+
+  <!-- Overlay móvil -->
+  <div
+    *ngIf="sidebarOpen && isMobile"
+    class="fixed inset-0 bg-black bg-opacity-50 z-40"
+    (click)="toggleSidebar()"
+  ></div>
+
+  <!-- Sidebar -->
+  <aside
+    [ngClass]="{
+      'translate-x-0': sidebarOpen || !isMobile,
+      '-translate-x-full': sidebarOpen === false && isMobile
+    }"
+    class="fixed md:relative z-50 w-64 bg-gray-900 p-5 flex flex-col shadow-lg h-full transform transition-transform duration-300"
+  >
+    <div class="flex items-center justify-between mb-6">
+      <h2 *ngIf="!isMobile" class="text-2xl font-bold text-[var(--asorisa-green)]">ASORISA</h2>
+      <button *ngIf="isMobile" (click)="toggleSidebar()" class="text-white text-2xl font-bold">✕</button>
+    </div>
+
+    <nav class="flex flex-col gap-3">
+      <a routerLink="/admin/productos" routerLinkActive="active" class="menu-link">📦 Productos</a>
+      <a routerLink="/admin/categorias" routerLinkActive="active" class="menu-link">🏷️ Categorías</a>
+      <a routerLink="/admin/ventas" routerLinkActive="active" class="menu-link">💰 Ventas</a>
+      <a routerLink="/admin/contacto" routerLinkActive="active" class="menu-link">📨 Mensajes recibidos</a>
+    </nav>
+
+    <button
+      (click)="logout()"
+      class="mt-auto bg-[var(--asorisa-green)] text-black py-2 px-4 rounded-lg font-semibold hover:bg-emerald-400 transition-all"
+    >
+      Cerrar sesión
+    </button>
+  </aside>
+
+  <!-- Contenido principal -->
+  <div class="flex-1 flex flex-col md:ml-64">
+    <!-- Topbar -->
+    <header class="flex items-center justify-between bg-gray-900 p-4 border-b border-gray-800">
+      <div class="flex items-center gap-4">
+        <button *ngIf="isMobile" (click)="toggleSidebar()" class="text-white text-2xl">☰</button>
+        <h1 class="text-xl font-semibold">Panel Administrativo</h1>
+      </div>
+      <p class="text-sm text-gray-400">Bienvenido, Admin 👋</p>
+    </header>
+
+    <!-- Contenido dinámico -->
+    <main class="p-6 animate-fade-in">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
