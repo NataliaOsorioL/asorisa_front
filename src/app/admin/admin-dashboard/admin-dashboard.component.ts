@@ -28,7 +28,7 @@ sidebarOpen = false; // controla sidebar en móvil
   onResize(event: any) {
     this.isMobile = event.target.innerWidth < 768;
 
-    // Si es desktop, cerramos el sidebar móvil
+    // Si es pc, se cierra el sidebar móvil
     if (!this.isMobile) {
       this.sidebarOpen = false;
     }
