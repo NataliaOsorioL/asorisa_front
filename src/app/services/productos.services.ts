@@ -69,7 +69,7 @@ export class ProductService {
     method: 'PUT',
     body: file,
     headers: {
-      'Content-Type': file.type // ⚠️ debe coincidir con el ContentType del presigned
+      'Content-Type': file.type 
     },
   });
 
