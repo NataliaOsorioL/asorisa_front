@@ -32,7 +32,7 @@ export class CartService {
 
   constructor(private http: HttpClient) {}
 
-  //Agregar al carrito
+  //agregar al carro
 addToCart(producto: Product, cantidad: number = 1) {
   const existing = this.cartItems.find(item => item.producto.id_producto === producto.id_producto);
 
@@ -49,19 +49,19 @@ addToCart(producto: Product, cantidad: number = 1) {
 
 
 
-  // ❌ Eliminar producto del carrito
+  // eliminar del carro
   removeFromCart(id: number) {
     this.cartItems = this.cartItems.filter(item => item.producto.id_producto !== id);
     this.updateState();
   }
 
-  // 🧹 Vaciar carrito
+  // vaciar carro
   clearCart() {
     this.cartItems = [];
     this.updateState();
   }
 
-  // 🔄 Actualizar estado reactivo del carrito
+  // actualizar estado reactivo del carro
   private updateState() {
     const total = this.cartItems.reduce(
       (acc, item) => acc + item.cantidad * item.producto.valor,
@@ -74,12 +74,12 @@ addToCart(producto: Product, cantidad: number = 1) {
     this.cartItemsSubject.next([...this.cartItems]);
   }
 
-  // 💾 Enviar carrito al backend (finalizar compra)
+  // enviar carro al backend (finalizar compra)
   finalizarCompra(carrito: any) {
     return this.http.post(`${this.API_URL}/carrito`, carrito);
   }
 
-  // 📦 Obtener todos los carritos (ventas)
+  // obtener todos los carros (ventas)
   getCarritos() {
     return this.http.get<{ ok: boolean; carritos: any[] }>(`${this.API_URL}/carrito`);
   }
